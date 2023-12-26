@@ -30,20 +30,14 @@ alt: 'Zebras on Zebra',
 
 
 const gallery = document.querySelector('.gallery');
-const galleryItems = images.map(image => {
 
-    const listItem = document.createElement('li');
-    listItem.classList.add('gallery-item');
+const createGalleryItem = ({ url, alt }) => {
+return `
+    <li class="gallery-item">
+    <img src="${url}" alt="${alt}" class="gallery-image">
+    </li>
+`;
+};
 
-    const imageElement = document.createElement('img');
-    imageElement.src = image.url;
-    imageElement.alt = image.alt;
-
-    listItem.appendChild(imageElement);
-    return listItem;
-
-});
-
-galleryItems.forEach(item => {
-    gallery.appendChild(item);
-});
+const galleryMarkup = images.map(createGalleryItem).join('');
+gallery.insertAdjacentHTML('beforeend', galleryMarkup);
